@@ -13,6 +13,9 @@ public class CommentAdminService {
 
     @Transactional
     public void deleteComment(long commentId) {
+        if(!commentRepository.existsById(commentId)){
+            throw new IllegalStateException("존재하지 않는 댓글입니다.");
+        }
         commentRepository.deleteById(commentId);
     }
 }
