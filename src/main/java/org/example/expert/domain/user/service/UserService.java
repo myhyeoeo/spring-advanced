@@ -41,7 +41,7 @@ public class UserService {
             throw new InvalidRequestException("잘못된 비밀번호입니다.");
         }
 
-        List<PasswordHistory> histories = passwordHistoryRepository.findByUserIdOrderByCreatedAtDesc(userId);
+        List<PasswordHistory> histories = passwordHistoryRepository.findTop3ByUserIdOrderByCreatedAtDesc(userId);
         List<PasswordHistory> recentHistories = histories.stream().limit(3).toList();
         for (PasswordHistory history : recentHistories) {
             if (passwordEncoder.matches(userChangePasswordRequest.getNewPassword(), history.getPassword())) {
