@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserChangePasswordRequest {
-
+    @Size(min = 8)
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).*$")
     @NotBlank
     private String oldPassword;
     @Size(min = 8)
